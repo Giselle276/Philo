@@ -77,11 +77,11 @@ int	check_input(t_table *table, char **argv)
 	if (table->num_philo == -1 || table->time_to_die == -1
 		|| table->time_to_eat == -1 || table->time_to_sleep == -1)
 		return (-1);
-	table->time_to_die = ft_atol(argv[2]) * 1e3;
-	table->time_to_eat = ft_atol(argv[3]) * 1e3;
-	table->time_to_sleep = ft_atol(argv[4]) * 1e3;
-	if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
-		|| table->time_to_sleep < 6e4)
+	table->time_to_die = ft_atol(argv[2]) * 1000;
+	table->time_to_eat = ft_atol(argv[3]) * 1000;
+	table->time_to_sleep = ft_atol(argv[4]) * 1000;
+	if (table->time_to_die < 60000 || table->time_to_eat < 60000
+		|| table->time_to_sleep < 60000)
 	{
 		error_print("Given time must be more than 60ms");
 		return (-1);
