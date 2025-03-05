@@ -28,7 +28,7 @@ int	init_philos_threads(t_table *table)
 		while (++i < table->num_philo)
 		{
 			if (safe_thread_handle(&table->philos[i].thread_id,
-					dinner_simulation, &table->philos[i], CREATE) == -1)
+					philo_routine, &table->philos[i], CREATE) == -1)
 				return (-1);
 		}
 	}
@@ -46,7 +46,7 @@ int	dinner_start(t_table *table)
 	if (safe_thread_handle(&table->controller, controller, table,
 			CREATE) == -1)
 		return (-1);
-	table->start_simulation = gettime(MILISECOND);
+	table->start_routine = gettime(MILISECOND);
 	set_bool(&table->table_mutex, &table->all_threads_ready, true);
 	i = -1;
 	while (++i < table->num_philo)
@@ -55,7 +55,7 @@ int	dinner_start(t_table *table)
 				JOIN) == -1)
 			return (-1);
 	}
-	set_bool(&table->table_mutex, &table->stop_simulation, true);
+	set_bool(&table->table_mutex, &table->stop_routine, true);
 	if (safe_thread_handle(&table->controller, NULL, NULL, JOIN) == -1)
 		return (-1);
 	return (0);

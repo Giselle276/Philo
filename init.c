@@ -49,7 +49,7 @@ int	data_init(t_table *table)
 	int	i;
 
 	i = -1;
-	table->stop_simulation = false;
+	table->stop_routine = false;
 	table->all_threads_ready = false;
 	table->num_threads_running = 0;
 	table->philos = malloc(sizeof(t_philo) * table->num_philo);

@@ -12,14 +12,13 @@
 
 #include "philo.h"
 
-void	thinking(t_philo *philo, bool pre_simulation)
+void	thinking(t_philo *philo)
 {
 	long	t_eat;
 	long	t_sleep;
 	long	t_think;
 
-	if (!pre_simulation)
-		print_status(THINKING, philo);
+	print_status(THINKING, philo);
 	if (philo->table->num_philo % 2 == 0)
 		return ;
 	t_eat = philo->table->time_to_eat;
@@ -41,7 +40,7 @@ void	*one_philo(void *arg)
 	increase_long(&philo->table->table_mutex,
 		&philo->table->num_threads_running);
 	print_status(TAKE_FIRST_FORK, philo);
-	while (!simulation_finished(philo->table))
+	while (!routine_finished(philo->table))
 		usleep(200);
 	return (NULL);
 }
@@ -63,7 +62,7 @@ void	eat(t_philo *philo)
 	safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
 }
 
-void	*dinner_simulation(void *data)
+void	*philo_routine(void *data)
 {
 	t_philo	*philo;
 
@@ -73,14 +72,14 @@ void	*dinner_simulation(void *data)
 		gettime(MILISECOND));
 	increase_long(&philo->table->table_mutex,
 		&philo->table->num_threads_running);
-	while (!simulation_finished(philo->table))
+	while (!routine_finished(philo->table))
 	{
 		if (philo->full_meal)
 			break ;
 		eat(philo);
 		print_status(SLEEPING, philo);
 		precise_usleep(philo->table->time_to_sleep, philo->table);
-		thinking(philo, false);
+		thinking(philo);
 	}
 	return (NULL);
 }

@@ -46,7 +46,7 @@ void	set_long(t_mtx *mutex, long *dest, long value)
 	safe_mutex_handle(mutex, UNLOCK);
 }
 
-bool	simulation_finished(t_table *table)
+bool	routine_finished(t_table *table)
 {
-	return (get_bool(&table->table_mutex, &table->stop_simulation));
+	return (get_bool(&table->table_mutex, &table->stop_routine));
 }

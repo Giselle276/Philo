@@ -36,14 +36,14 @@ void	*controller(void *data)
 	while (!all_threads_running(&table->table_mutex,
 			&table->num_threads_running, table->num_philo))
 		;
-	while (!simulation_finished(table))
+	while (!routine_finished(table))
 	{
 		i = -1;
-		while (++i < table->num_philo && !simulation_finished(table))
+		while (++i < table->num_philo && !routine_finished(table))
 		{
 			if (philo_died(table->philos + i))
 			{
-				set_bool(&table->table_mutex, &table->stop_simulation, true);
+				set_bool(&table->table_mutex, &table->stop_routine, true);
 				print_status(DIED, table->philos + i);
 			}
 		}
