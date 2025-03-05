@@ -38,20 +38,6 @@ void	increase_long(t_mtx *mutex, long *value)
 	safe_mutex_handle(mutex, UNLOCK);
 }
 
-void	de_synchronize_philos(t_philo *philo)
-{
-	if (philo->table->num_philo % 2 == 0)
-	{
-		if (philo->id % 2 == 0)
-			precise_usleep(30000, philo->table);
-	}
-	else
-	{
-		if (philo->id % 2)
-			thinking(philo, true);
-	}
-}
-
 int	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode)
 {

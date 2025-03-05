@@ -123,7 +123,6 @@ bool		all_threads_running(t_mtx *mutex, long *threads,
 void		wait_all_threads(t_table *table);
 void		clean(t_table *table);
 void		thinking(t_philo *philo, bool pre_simulation);
-void		de_synchronize_philos(t_philo *philo);
 int			init_philos_threads(t_table *table);
 void		*dinner_simulation(void *data);
 int			safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
